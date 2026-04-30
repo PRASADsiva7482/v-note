@@ -99,6 +99,20 @@
             font-weight: 600;
         }
 
+        .nav-item {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item.center {
+            justify-content: center;
+        }
+
+        .nav-item.right {
+            justify-content: flex-end;
+        }
+
         .pause-btn {
             background: var(--primary);
             color: var(--bg-color);
@@ -108,9 +122,11 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
+            min-width: 160px; /* Stabilize button width */
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
@@ -355,6 +371,12 @@
                 padding: 1.25rem;
             }
 
+            .nav-item {
+                flex: none;
+                width: 100%;
+                justify-content: center !important;
+            }
+
             .redirect-box {
                 padding: 1.5rem 1rem;
             }
@@ -365,24 +387,31 @@
 <body>
 
     <header class="header-bar">
-        <div class="timer-container">
-            <span class="timer-label">Redirecting in</span>
-            <span class="timer-count" id="timer-count">10</span>
-            <span class="timer-sec">s</span>
+        <div class="nav-item">
+            <div class="timer-container">
+                <span class="timer-label">Redirecting in</span>
+                <span class="timer-count" id="timer-count">10</span>
+                <span class="timer-sec">s</span>
+            </div>
         </div>
-        <div class="logo-container" style="display: flex; align-items: center; gap: 0.75rem;">
-            <img src="favicon.svg" alt="App Logo"
-                style="height: 44px; width: 44px; filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.3));">
-            <span
-                style="font-weight: 800; font-size: 1.5rem; background: linear-gradient(135deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></span>
+        
+        <div class="nav-item center">
+            <div class="logo-container" style="display: flex; align-items: center; gap: 0.75rem;">
+                <img src="favicon.svg" alt="App Logo"
+                    style="height: 44px; width: 44px; filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.3));">
+                <span style="font-weight: 800; font-size: 1.5rem; background: linear-gradient(135deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></span>
+            </div>
         </div>
-        <button class="pause-btn" id="pause-btn">
-            <svg id="pause-icon" style="width:20px;height:20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M15.75 5.25v13.5m-7.5-13.5v13.5"></path>
-            </svg>
-            <span id="pause-text">Hold to Read</span>
-        </button>
+
+        <div class="nav-item right">
+            <button class="pause-btn" id="pause-btn">
+                <svg id="pause-icon" style="width:20px;height:20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15.75 5.25v13.5m-7.5-13.5v13.5"></path>
+                </svg>
+                <span id="pause-text">Hold to Read</span>
+            </button>
+        </div>
     </header>
 
     <div class="container">
