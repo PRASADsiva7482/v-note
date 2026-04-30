@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Status & Updates</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         :root {
             --bg-color: #020617;
@@ -37,9 +39,17 @@
         }
 
         @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         /* Header & Timer */
@@ -142,8 +152,15 @@
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h1 {
@@ -209,17 +226,37 @@
         }
 
         /* Specific Notice Colors */
-        .notice-item.warning { border-left-color: var(--warning); }
-        .notice-item.warning .notice-icon { color: var(--warning); }
-        
-        .notice-item.danger { border-left-color: var(--danger); }
-        .notice-item.danger .notice-icon { color: var(--danger); }
-        
-        .notice-item.info { border-left-color: var(--info); }
-        .notice-item.info .notice-icon { color: var(--info); }
-        
-        .notice-item.success { border-left-color: var(--success); }
-        .notice-item.success .notice-icon { color: var(--success); }
+        .notice-item.warning {
+            border-left-color: var(--warning);
+        }
+
+        .notice-item.warning .notice-icon {
+            color: var(--warning);
+        }
+
+        .notice-item.danger {
+            border-left-color: var(--danger);
+        }
+
+        .notice-item.danger .notice-icon {
+            color: var(--danger);
+        }
+
+        .notice-item.info {
+            border-left-color: var(--info);
+        }
+
+        .notice-item.info .notice-icon {
+            color: var(--info);
+        }
+
+        .notice-item.success {
+            border-left-color: var(--success);
+        }
+
+        .notice-item.success .notice-icon {
+            color: var(--success);
+        }
 
         /* Redirect Action Box */
         .redirect-box {
@@ -236,8 +273,11 @@
         .redirect-box::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at center, rgba(56,189,248,0.1) 0%, transparent 70%);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -289,32 +329,39 @@
                 border-bottom: none;
                 background: transparent;
             }
+
             .timer-container {
                 background: rgba(2, 6, 23, 0.8);
                 padding: 0.5rem 1.5rem;
                 border-radius: 9999px;
                 border: 1px solid var(--border-color);
             }
+
             .container {
                 margin-top: 1rem;
             }
+
             .card {
                 padding: 1.5rem;
             }
+
             h1 {
                 font-size: 1.8rem;
             }
+
             .notice-item {
                 flex-direction: column;
                 gap: 0.75rem;
                 padding: 1.25rem;
             }
+
             .redirect-box {
                 padding: 1.5rem 1rem;
             }
         }
     </style>
 </head>
+
 <body>
 
     <header class="header-bar">
@@ -323,8 +370,17 @@
             <span class="timer-count" id="timer-count">10</span>
             <span class="timer-sec">s</span>
         </div>
+        <div class="logo-container" style="display: flex; align-items: center; gap: 0.75rem;">
+            <img src="favicon.svg" alt="App Logo"
+                style="height: 44px; width: 44px; filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.3));">
+            <span
+                style="font-weight: 800; font-size: 1.5rem; background: linear-gradient(135deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></span>
+        </div>
         <button class="pause-btn" id="pause-btn">
-            <svg id="pause-icon" style="width:20px;height:20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.75 5.25v13.5m-7.5-13.5v13.5"></path></svg>
+            <svg id="pause-icon" style="width:20px;height:20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15.75 5.25v13.5m-7.5-13.5v13.5"></path>
+            </svg>
             <span id="pause-text">Hold to Read</span>
         </button>
     </header>
@@ -332,72 +388,105 @@
     <div class="container">
         <div class="card">
             <h1>Welcome to Our Platform</h1>
-            
+
             <div class="notice-list">
-                
+
                 <!-- Under Development Notice -->
                 <div class="notice-item info">
                     <div class="notice-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"></path></svg>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z">
+                            </path>
+                        </svg>
                     </div>
                     <div class="notice-content">
                         <h3>Actively Under Development</h3>
-                        <p>This social media app is currently in its development phase. Many features are still being worked on and refined to give you the best experience possible.</p>
+                        <p>This social media app is currently in its development phase. Many features are still being
+                            worked on and refined to give you the best experience possible.</p>
                     </div>
                 </div>
 
                 <!-- Storage Notice -->
                 <div class="notice-item danger">
                     <div class="notice-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"></path></svg>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125">
+                            </path>
+                        </svg>
                     </div>
                     <div class="notice-content">
                         <h3>Storage Limitations</h3>
-                        <p>Due to storage constraints, <span class="highlight">uploaded media files may be deleted without prior notice</span>. However, your profile pictures will be safely stored for a longer period.</p>
+                        <p>Due to storage constraints, <span class="highlight">uploaded media files may be deleted
+                                without prior notice</span>. However, your profile pictures will be safely stored for a
+                            longer period.</p>
                     </div>
                 </div>
 
                 <!-- Registration Notice -->
                 <div class="notice-item success">
                     <div class="notice-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"></path></svg>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z">
+                            </path>
+                        </svg>
                     </div>
                     <div class="notice-content">
                         <h3>New Users Welcome</h3>
-                        <p>If you are a new user, please <strong>Register first</strong> to continue. Once registered, remember that you can login using either your Username or Email address.</p>
+                        <p>If you are a new user, please <strong>Register first</strong> to continue. Once registered,
+                            remember that you can login using either your Username or Email address.</p>
                     </div>
                 </div>
 
                 <!-- Bug Reporting -->
                 <div class="notice-item">
                     <div class="notice-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path></svg>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75">
+                            </path>
+                        </svg>
                     </div>
                     <div class="notice-content">
                         <h3>Found an Issue?</h3>
-                        <p>If you encounter any bugs, please email us at <span class="highlight">v.sivaprasad7482@gmail.com</span> with details and screenshots. Our team will try to resolve them within 24 hours.</p>
+                        <p>If you encounter any bugs, please email us at <span
+                                class="highlight">v.sivaprasad7482@gmail.com</span> with details and screenshots. Our
+                            team will try to resolve them within 24 hours.</p>
                     </div>
                 </div>
 
                 <!-- UI Notice -->
                 <div class="notice-item">
                     <div class="notice-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.879-5.818a1.5 1.5 0 00-2.112-2.112l-5.818 3.879a15.995 15.995 0 00-4.648 4.764m3.42 3.42a6.746 6.746 0 00-3.42-3.42"></path></svg>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.879-5.818a1.5 1.5 0 00-2.112-2.112l-5.818 3.879a15.995 15.995 0 00-4.648 4.764m3.42 3.42a6.746 6.746 0 00-3.42-3.42">
+                            </path>
+                        </svg>
                     </div>
                     <div class="notice-content">
                         <h3>UI Improvements Ongoing</h3>
-                        <p>The current login page uses a basic design. We are actively working on proper themes to enhance your visual experience soon!</p>
+                        <p>The current login page uses a basic design. We are actively working on proper themes to
+                            enhance your visual experience soon!</p>
                     </div>
                 </div>
 
                 <!-- Redirect Warning -->
                 <div class="notice-item warning">
                     <div class="notice-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+                            </path>
+                        </svg>
                     </div>
                     <div class="notice-content">
                         <h3>Important Step After Redirect</h3>
-                        <p>Once redirected to the host URL, you might see an Ngrok warning page. <span class="highlight">Please click on "Visit Site"</span> to bypass it and proceed to the actual Login or Register page.</p>
+                        <p>Once redirected to the host URL, you might see an Ngrok warning page. <span
+                                class="highlight">Please click on "Visit Site"</span> to bypass it and proceed to the
+                            actual Login or Register page.</p>
                     </div>
                 </div>
 
@@ -407,7 +496,10 @@
                 <p>You can also manually navigate if you don't want to wait.</p>
                 <a href="http://copious-opposite-mangle.ngrok-free.dev/" class="btn-primary" id="manual-redirect">
                     Proceed to App Now
-                    <svg style="width:20px;height:20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <svg style="width:20px;height:20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
                 </a>
             </div>
 
@@ -465,4 +557,5 @@
         });
     </script>
 </body>
+
 </html>
