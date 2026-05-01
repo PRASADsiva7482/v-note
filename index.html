@@ -387,7 +387,7 @@
 <body>
 
     <header class="header-bar">
-        <div class="nav-item">
+        <div class="nav-item" id="timer-nav-item">
             <div class="timer-container">
                 <span class="timer-label">Redirecting in</span>
                 <span class="timer-count" id="timer-count">10</span>
@@ -403,7 +403,7 @@
             </div>
         </div>
 
-        <div class="nav-item right">
+        <div class="nav-item right" id="pause-nav-item">
             <button class="pause-btn" id="pause-btn">
                 <svg id="pause-icon" style="width:20px;height:20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -414,7 +414,7 @@
         </div>
     </header>
 
-    <div class="container">
+    <div class="container" id="normal-content">
         <div class="card">
             <h1>Welcome to Our Platform</h1>
 
@@ -550,7 +550,37 @@
         </div>
     </div>
 
+    <div class="container" id="maintenance-content" style="display: none;">
+        <div class="card" style="text-align: center; padding: 4rem 2rem;">
+            <svg style="width: 80px; height: 80px; color: var(--warning); margin: 0 auto 1.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <h1 style="font-size: 3rem; margin-bottom: 1rem; background: linear-gradient(135deg, #fcd34d, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Under Maintenance</h1>
+            <p style="color: var(--text-secondary); font-size: 1.2rem; line-height: 1.6; max-width: 600px; margin: 0 auto 2.5rem;">
+                We are currently performing scheduled maintenance to improve our systems and provide you with a better experience. We will be back online shortly!
+            </p>
+            <div style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 2rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 9999px; color: #fcd34d; font-weight: 600;">
+                <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Expected Downtime: ~1-2 Hours
+            </div>
+            
+            <div style="margin-top: 3rem; border-top: 1px solid var(--border-color); padding-top: 2rem;">
+                 <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                    Thank you for your patience.<br>
+                    Need urgent help? Contact us at <span style="color: var(--primary);">v.sivaprasad7482@gmail.com</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // CENTRAL TAG FOR MAINTENANCE MODE
+        // Set to true to show maintenance page, false to show redirect page
+        const UNDER_MAINTENANCE = true;
+
         const targetUrl = "http://copious-opposite-mangle.ngrok-free.dev/";
         let timeLeft = 10;
         let isPaused = false;
@@ -561,11 +591,16 @@
         const pauseText = document.getElementById('pause-text');
         const pauseIcon = document.getElementById('pause-icon');
 
+        const normalContent = document.getElementById('normal-content');
+        const maintenanceContent = document.getElementById('maintenance-content');
+        const timerNavItem = document.getElementById('timer-nav-item');
+        const pauseNavItem = document.getElementById('pause-nav-item');
+
         const playSvg = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"></path>';
         const pauseSvg = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.75 5.25v13.5m-7.5-13.5v13.5"></path>';
 
         function updateTimerDisplay() {
-            timerCountEl.innerText = timeLeft;
+            if (timerCountEl) timerCountEl.innerText = timeLeft;
         }
 
         function startTimer() {
@@ -583,21 +618,33 @@
 
         function toggleTimer() {
             isPaused = !isPaused;
-            if (isPaused) {
-                pauseBtn.classList.add('paused');
-                pauseText.innerText = "Resume";
-                pauseIcon.innerHTML = playSvg;
-            } else {
-                pauseBtn.classList.remove('paused');
-                pauseText.innerText = "Hold to Read";
-                pauseIcon.innerHTML = pauseSvg;
+            if (pauseBtn) {
+                if (isPaused) {
+                    pauseBtn.classList.add('paused');
+                    pauseText.innerText = "Resume";
+                    pauseIcon.innerHTML = playSvg;
+                } else {
+                    pauseBtn.classList.remove('paused');
+                    pauseText.innerText = "Hold to Read";
+                    pauseIcon.innerHTML = pauseSvg;
+                }
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            updateTimerDisplay();
-            startTimer();
-            pauseBtn.addEventListener('click', toggleTimer);
+            if (UNDER_MAINTENANCE) {
+                // Maintenance Mode: Hide normal content, timer, pause button
+                if (normalContent) normalContent.style.display = 'none';
+                if (timerNavItem) timerNavItem.style.display = 'none';
+                if (pauseNavItem) pauseNavItem.style.display = 'none';
+                if (maintenanceContent) maintenanceContent.style.display = 'block';
+            } else {
+                // Normal Mode: Proceed with redirect logic
+                if (maintenanceContent) maintenanceContent.style.display = 'none';
+                updateTimerDisplay();
+                startTimer();
+                if (pauseBtn) pauseBtn.addEventListener('click', toggleTimer);
+            }
         });
     </script>
 </body>
